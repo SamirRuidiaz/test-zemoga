@@ -1,0 +1,39 @@
+.boxInformation {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 25px;
+  background-color: #ddddde;
+  color: #363636;
+  margin: 40px 0;
+
+  &__speak {
+    text-align: justify;
+    width: 30%;
+
+    p {
+      font-size: 26px;
+    }
+    h3 {
+      font-size: 47px;
+      margin-block-start: 0;
+    }
+  }
+
+  &__descrip {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  &__close {
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    padding-left: 30px;
+    line-height: 21px;
+  }
+}
