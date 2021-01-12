@@ -1,0 +1,156 @@
+.ItemVotes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 48%;
+  height: 700px;
+  margin-bottom: 50px;
+
+  &__box {
+    position: relative;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+
+    -webkit-box-shadow: inset 0px -176px 129px 0px rgba(0,0,0,0.36);
+    -moz-box-shadow: inset 0px -176px 129px 0px rgba(0,0,0,0.36);
+    box-shadow: inset 0px -176px 129px 0px rgba(0,0,0,0.36);
+  }
+
+  &__boxItem {
+    color: #FFF;
+    position: absolute;
+    bottom: 0;
+    padding: 50px;
+  }
+
+  &__title {
+    font-size: 60px;
+    padding-bottom: 20px;
+  }
+
+  &__ago {
+    font-size: 15px;
+    padding-bottom: 20px;
+    font-weight: 100;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &__descrip {
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__voteNow {
+    border: 1px solid #FFF;
+    background-color: transparent;
+    font-size: 15px;
+    color: #FFF;
+    padding: 12px 30px;
+  }
+
+  &__selector {
+    display: inline;
+  }
+
+  &__selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+  }
+  
+  &__contentImg {
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:25px;
+    height:25px;
+  }
+
+  .drinkcardTitle {
+    position: absolute;
+    left: 0;
+    top: 57%;
+    height: 25px;
+    font-size: initial;
+  }
+
+
+  .drinkcard{
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 15px;
+    border: 3px solid transparent;
+  }
+
+  .drinkcard.bkLike{
+    background-color: var(--like);
+  }
+  .drinkcard.bkUnLike{
+    background-color: var(--unlike);
+  }+
+
+  .drinkcard:hover{
+    border: 3px solid #FFF;
+  }
+
+  &__selector input:checked +.drinkcard{
+    border: 3px solid #FFF;
+  }
+
+
+  &__contentSelector {
+    display: flex;
+  }
+
+
+  &__progress {
+    height: 60px;
+    
+    display: flex;
+    justify-content: space-between;
+
+    .progressUp, .progressDown {
+      color: #ffffff;
+      align-items: center;
+      min-width: 13%;
+
+      img {
+        width: 35px;
+      }
+
+      p {
+        font-size: 30px;
+        padding-left: 5px;
+
+        span {
+          font-size: 25px;
+        }
+      }
+    } 
+
+    .progressUp {
+      background-color: var(--like);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 12px;
+    }
+
+    .progressDown {
+      background-color: var(--unlike);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 12px;
+    }
+  }
+
+}

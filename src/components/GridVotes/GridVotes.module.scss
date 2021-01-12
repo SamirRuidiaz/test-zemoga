@@ -1,0 +1,14 @@
+.GridVotes {
+
+  &__title {
+    font-size: 45px;
+    color: #777777;
+    margin-bottom: 20px;
+  }
+
+  &__boxItems {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
