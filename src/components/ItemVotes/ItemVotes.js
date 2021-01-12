@@ -61,17 +61,89 @@ export const ItemVotes = ({valueItem}) => {
     return Math.ceil( (number*100)/( like + unlike) ); 
   }
 
+  const _renderContentSelector = () => (
+    <div className={styles.ItemVotes__contentSelector}>
+      {
+        !voted &&
+        <>
+          <div className={styles.ItemVotes__selector}>
+            <input 
+              onChange={ handleOptionChange }
+              checked={stateVote.selectedOption === 'like'}
+              id={`like-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="like" />
+            <label className={`${styles.drinkcard} ${styles.bkLike} pointer`} htmlFor={`like-${valueItem.id}`}>
+              <span 
+                style={{backgroundImage: 'url(/assets/like.png'}}
+                className={styles.ItemVotes__contentImg}></span>
+            </label>
+
+            <input 
+              onChange={ handleOptionChange }
+              checked={stateVote.selectedOption === 'unlike'}
+              id={`unlike-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="unlike" />
+            <label className={`${styles.drinkcard} ${styles.bkUnLike} pointer`} htmlFor={`unlike-${valueItem.id}`}>
+              <span
+                style={{backgroundImage: 'url(/assets/unlike.png'}} 
+                className={styles.ItemVotes__contentImg}></span>
+            </label>
+          </div>
+
+          <button 
+            onClick={ handleVote }
+            className={`${styles.ItemVotes__voteNow} pointer`}
+            type="button">Vote now</button>
+        </>
+      } 
+      {
+        voted &&
+        <>
+          <button 
+            onClick={ handleVoteAgain }
+            className={`${styles.ItemVotes__voteNow} pointer`}
+            type="button">Vote again</button>
+        </>
+      }
+    </div>
+  )
+
+  const _renderContentProgress = () => (
+    <div className={styles.ItemVotes__progress}>
+      <div style={{ width: `${  getPercent(like) }%` }} className={styles.progressUp}>
+        <img src={'/assets/like.png'} alt="like" />
+          <p>
+            {`${ getPercent(like) }`}<span>%</span>
+          </p>
+      </div>
+      <div style={{ width: `${ getPercent(unlike) }%` }} className={styles.progressDown}>
+        <img src={'/assets/unlike.png'} alt="inlike" />
+        <p>
+          {`${ getPercent(unlike) }`}<span>%</span>
+        </p>
+      </div>
+    </div>
+  )
+
   return(
     <div className={styles.ItemVotes}>
       <div style={{backgroundImage: `url(${valueItem.img})`}} className={styles.ItemVotes__box}>
 
-      <div className={styles.drinkcardTitle}>
-            <div className={`${styles.drinkcard} ${styles.bkLike}`}>
-              <span 
-                style={{backgroundImage: 'url(/assets/like.png'}}
-                className={styles.ItemVotes__contentImg}></span>
+          {
+            (getPercent(like) >= 50) ? 
+            <div className={styles.drinkcardTitle}>
+              <div className={`${styles.drinkcard} ${styles.bkLike}`}>
+                <span 
+                  style={{backgroundImage: 'url(/assets/like.png'}}
+                  className={styles.ItemVotes__contentImg}></span>
+              </div>
+            </div> :
+            <div className={styles.drinkcardTitle}>
+              <div className={`${styles.drinkcard} ${styles.bkUnLike}`}>
+                <span 
+                  style={{backgroundImage: 'url(/assets/unlike.png'}}
+                  className={styles.ItemVotes__contentImg}></span>
+              </div>
             </div>
-          </div>
+          }
 
         <div className={styles.ItemVotes__boxItem}>
           <h2 className={styles.ItemVotes__title}>
@@ -82,65 +154,12 @@ export const ItemVotes = ({valueItem}) => {
             { (!voted) ? valueItem.descrip : 'Thank you for voting!' }
           </p>
 
-          <div className={styles.ItemVotes__contentSelector}>
-            {
-              !voted &&
-              <>
-                <div className={styles.ItemVotes__selector}>
-                  <input 
-                    onChange={ handleOptionChange }
-                    checked={stateVote.selectedOption === 'like'}
-                    id={`like-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="like" />
-                  <label className={`${styles.drinkcard} ${styles.bkLike} pointer`} htmlFor={`like-${valueItem.id}`}>
-                    <span 
-                      style={{backgroundImage: 'url(/assets/like.png'}}
-                      className={styles.ItemVotes__contentImg}></span>
-                  </label>
-
-                  <input 
-                    onChange={ handleOptionChange }
-                    checked={stateVote.selectedOption === 'unlike'}
-                    id={`unlike-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="unlike" />
-                  <label className={`${styles.drinkcard} ${styles.bkUnLike} pointer`} htmlFor={`unlike-${valueItem.id}`}>
-                    <span
-                      style={{backgroundImage: 'url(/assets/unlike.png'}} 
-                      className={styles.ItemVotes__contentImg}></span>
-                  </label>
-                </div>
-
-                <button 
-                  onClick={ handleVote }
-                  className={`${styles.ItemVotes__voteNow} pointer`}
-                  type="button">Vote now</button>
-              </>
-            } 
-            {
-              voted &&
-              <>
-                <button 
-                  onClick={ handleVoteAgain }
-                  className={`${styles.ItemVotes__voteNow} pointer`}
-                  type="button">Vote again</button>
-              </>
-            }
-          </div>
+          { _renderContentSelector() }
+          
         </div>
       </div>
 
-      <div className={styles.ItemVotes__progress}>
-        <div style={{ width: `${  getPercent(like) }%` }} className={styles.progressUp}>
-          <img src={'/assets/like.png'} alt="like" />
-            <p>
-              {`${ getPercent(like) }`}<span>%</span>
-            </p>
-        </div>
-        <div style={{ width: `${ getPercent(unlike) }%` }} className={styles.progressDown}>
-          <img src={'/assets/unlike.png'} alt="inlike" />
-          <p>
-            {`${ getPercent(unlike) }`}<span>%</span>
-          </p>
-        </div>
-      </div>
+      { _renderContentProgress() }
     </div>
   )
 };
