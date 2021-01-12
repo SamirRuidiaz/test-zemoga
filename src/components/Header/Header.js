@@ -32,7 +32,7 @@ export const Header = () => (
               pedophile punishing pontiff? (thumbs up) 
             </h3>
 
-            <span className={styles.navbar__info}> <i class="fab fa-wikipedia-w"></i> More information</span>
+            <span className={styles.navbar__info}> <i className="fab fa-wikipedia-w"></i> More information</span>
             <h3 className={styles.navbar__verdict}>What's Your Verdict?</h3>
           </div>
 
