@@ -1,7 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './ItemVotes.module.scss';
 
 export const ItemVotes = ({valueItem}) => {
+
+  const [stateVote, setVote] = useState({
+    id: valueItem.id,
+    like: valueItem.like,
+    unlike: valueItem.unlike,
+    selectedOption: '',
+    voted: false,
+  });
+  const { like, unlike, voted } = stateVote;
+  const handleVote = () => {
+    let tempLi = (stateVote.selectedOption === 'like') ? (like + 1) : like;
+    let tempUnLi = (stateVote.selectedOption === 'unlike') ? (unlike + 1) : unlike;
+    const getDataStore = JSON.parse(localStorage.getItem('dataVotes'));
+    const newDataStore = getDataStore.map((d) => {
+      if (d.id === valueItem.id) {
+        return {
+          ...d,
+          like: tempLi,
+          unlike: tempUnLi,
+        }
+      }
+      return d;
+    });
+    localStorage.setItem('dataVotes', JSON.stringify(newDataStore));
+
+    setVote((v) => {
+      return {
+        ...v,
+        like: tempLi,
+        unlike: tempUnLi,
+        voted: true,
+      }
+    });
+  }
+
+  const handleOptionChange = (e) => {
+    setVote((v) => {
+      return {
+        ...v,
+        selectedOption: e.target.value,
+      }
+    });
+  }
+
+  const handleVoteAgain = () => {
+    setVote((v) => {
+      return {
+        ...v,
+        selectedOption: '',
+        voted: false,
+      }
+    });
+  }
+
+  const getPercent = (number) => {
+    return Math.ceil( (number*100)/( like + unlike) ); 
+  }
 
   return(
     <div className={styles.ItemVotes}>
@@ -20,47 +78,73 @@ export const ItemVotes = ({valueItem}) => {
             { valueItem.name }
           </h2>
           <p className={styles.ItemVotes__ago}> <span>1 month ago</span>{ valueItem.ago }</p>
-          <p className={styles.ItemVotes__descrip}>{ valueItem.descrip }</p>
+          <p className={styles.ItemVotes__descrip}>
+            { (!voted) ? valueItem.descrip : 'Thank you for voting!' }
+          </p>
 
           <div className={styles.ItemVotes__contentSelector}>
-            <div className={styles.ItemVotes__selector}>
-              <input id="like" type="radio" name="voting" value="1" />
-              <label className={`${styles.drinkcard} ${styles.bkLike} pointer`} htmlFor="like">
-                <span 
-                  style={{backgroundImage: 'url(/assets/like.png'}}
-                  className={styles.ItemVotes__contentImg}></span>
-              </label>
+            {
+              !voted &&
+              <>
+                <div className={styles.ItemVotes__selector}>
+                  <input 
+                    onChange={ handleOptionChange }
+                    checked={stateVote.selectedOption === 'like'}
+                    id={`like-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="like" />
+                  <label className={`${styles.drinkcard} ${styles.bkLike} pointer`} htmlFor={`like-${valueItem.id}`}>
+                    <span 
+                      style={{backgroundImage: 'url(/assets/like.png'}}
+                      className={styles.ItemVotes__contentImg}></span>
+                  </label>
 
-              <input id="unlike" type="radio" name="voting" value="1" />
-              <label className={`${styles.drinkcard} ${styles.bkUnLike} pointer`} htmlFor="unlike">
-                <span
-                  style={{backgroundImage: 'url(/assets/unlike.png'}} 
-                  className={styles.ItemVotes__contentImg}></span>
-              </label>
-            </div>
+                  <input 
+                    onChange={ handleOptionChange }
+                    checked={stateVote.selectedOption === 'unlike'}
+                    id={`unlike-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="unlike" />
+                  <label className={`${styles.drinkcard} ${styles.bkUnLike} pointer`} htmlFor={`unlike-${valueItem.id}`}>
+                    <span
+                      style={{backgroundImage: 'url(/assets/unlike.png'}} 
+                      className={styles.ItemVotes__contentImg}></span>
+                  </label>
+                </div>
 
-            <button 
-              className={styles.ItemVotes__voteNow}
-              type="button">Vote now</button>
+                <button 
+                  onClick={ handleVote }
+                  className={`${styles.ItemVotes__voteNow} pointer`}
+                  type="button">Vote now</button>
+              </>
+            } 
+            {
+              voted &&
+              <>
+                <button 
+                  onClick={ handleVoteAgain }
+                  className={`${styles.ItemVotes__voteNow} pointer`}
+                  type="button">Vote again</button>
+              </>
+            }
           </div>
-
         </div>
       </div>
 
       <div className={styles.ItemVotes__progress}>
-        <div style={{ width: `${64}%` }} className={styles.progressUp}>
+        <div style={{ width: `${  getPercent(like) }%` }} className={styles.progressUp}>
           <img src={'/assets/like.png'} alt="like" />
             <p>
-              {`${ valueItem.like }`}<span>%</span>
+              {`${ getPercent(like) }`}<span>%</span>
             </p>
         </div>
-        <div style={{ width: `${36}%` }} className={styles.progressDown}>
+        <div style={{ width: `${ getPercent(unlike) }%` }} className={styles.progressDown}>
           <img src={'/assets/unlike.png'} alt="inlike" />
           <p>
-            {`${ valueItem.unlike }`}<span>%</span>
+            {`${ getPercent(unlike) }`}<span>%</span>
           </p>
         </div>
       </div>
     </div>
   )
+};
+
+ItemVotes.propTypes = {
+  valueItem: PropTypes.object.isRequired
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.module.scss';
+import { Link } from "react-router-dom";
 
 export const Header = () => (
   <header style={{backgroundImage: 'url(/assets/slider.png)'}} className={styles.navbar}>
@@ -7,17 +8,16 @@ export const Header = () => (
       <div className="container">
 
         <nav className={styles.navbar__navigation}>
-          <p className={styles.navbar__logo}>Rule of Thumb. </p>
+          <p className={styles.navbar__logo}><Link to="/">Rule of Thumb.</Link></p>
           <ul className={styles.navbar__ul}>
-            <li>Past Trials</li>
-            <li>How It Works</li>
-            <li>Log In/Sign Up</li>
+            <li><Link to="/trials">Past Trials</Link></li>
+            <li><Link to="/works">How It Works</Link></li>
+            <li><Link to="/login-signup">Log In/Sign Up</Link></li>
             <li>
               <img src={'/assets/search.png'}  alt="Seach" />
             </li>
           </ul>
         </nav>
-
 
         <article className={styles.navbar__article}>
           <div className={styles.navbar__descrip}>
