@@ -1,62 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ItemVotes.module.scss';
+import { useStateVote } from '../../hooks/useStateVote';
 
 export const ItemVotes = ({valueItem}) => {
 
-  const [stateVote, setVote] = useState({
-    id: valueItem.id,
-    like: valueItem.like,
-    unlike: valueItem.unlike,
-    selectedOption: '',
-    voted: false,
-  });
+  const {stateVote, handleVote, handleVoteAgain, handleOption} = useStateVote(valueItem);
   const { like, unlike, voted } = stateVote;
-  const handleVote = () => {
-    let tempLi = (stateVote.selectedOption === 'like') ? (like + 1) : like;
-    let tempUnLi = (stateVote.selectedOption === 'unlike') ? (unlike + 1) : unlike;
-    const getDataStore = JSON.parse(localStorage.getItem('dataVotes'));
-    const newDataStore = getDataStore.map((d) => {
-      if (d.id === valueItem.id) {
-        return {
-          ...d,
-          like: tempLi,
-          unlike: tempUnLi,
-        }
-      }
-      return d;
-    });
-    localStorage.setItem('dataVotes', JSON.stringify(newDataStore));
-
-    setVote((v) => {
-      return {
-        ...v,
-        like: tempLi,
-        unlike: tempUnLi,
-        voted: true,
-      }
-    });
-  }
-
-  const handleOptionChange = (e) => {
-    setVote((v) => {
-      return {
-        ...v,
-        selectedOption: e.target.value,
-      }
-    });
-  }
-
-  const handleVoteAgain = () => {
-    setVote((v) => {
-      return {
-        ...v,
-        selectedOption: '',
-        voted: false,
-      }
-    });
-  }
-
   const getPercent = (number) => {
     return Math.ceil( (number*100)/( like + unlike) ); 
   }
@@ -68,7 +18,7 @@ export const ItemVotes = ({valueItem}) => {
         <>
           <div className={styles.ItemVotes__selector}>
             <input 
-              onChange={ handleOptionChange }
+              onChange={ (e) => handleOption(e.target.value) }
               checked={stateVote.selectedOption === 'like'}
               id={`like-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="like" />
             <label className={`${styles.drinkcard} ${styles.bkLike} pointer`} htmlFor={`like-${valueItem.id}`}>
@@ -78,7 +28,7 @@ export const ItemVotes = ({valueItem}) => {
             </label>
 
             <input 
-              onChange={ handleOptionChange }
+              onChange={ (e) => handleOption(e.target.value) }
               checked={stateVote.selectedOption === 'unlike'}
               id={`unlike-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="unlike" />
             <label className={`${styles.drinkcard} ${styles.bkUnLike} pointer`} htmlFor={`unlike-${valueItem.id}`}>
