@@ -23,7 +23,7 @@ export const ItemVotes = ({valueItem}) => {
               id={`like-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="like" />
             <label className={`${styles.drinkcard} ${styles.bkLike} pointer`} htmlFor={`like-${valueItem.id}`}>
               <span 
-                style={{backgroundImage: 'url(/assets/like.png'}}
+                style={{backgroundImage: 'url(./assets/like.png'}}
                 className={styles.ItemVotes__contentImg}></span>
             </label>
 
@@ -33,7 +33,7 @@ export const ItemVotes = ({valueItem}) => {
               id={`unlike-${valueItem.id}`} type="radio" name={`voting-${valueItem.id}`} value="unlike" />
             <label className={`${styles.drinkcard} ${styles.bkUnLike} pointer`} htmlFor={`unlike-${valueItem.id}`}>
               <span
-                style={{backgroundImage: 'url(/assets/unlike.png'}} 
+                style={{backgroundImage: 'url(./assets/unlike.png'}} 
                 className={styles.ItemVotes__contentImg}></span>
             </label>
           </div>
@@ -59,13 +59,13 @@ export const ItemVotes = ({valueItem}) => {
   const _renderContentProgress = () => (
     <div className={styles.ItemVotes__progress}>
       <div style={{ width: `${  getPercent(like) }%` }} className={styles.progressUp}>
-        <img src={'/assets/like.png'} alt="like" />
+        <img src={'./assets/like.png'} alt="like" />
           <p>
             {`${ getPercent(like) }`}<span>%</span>
           </p>
       </div>
       <div style={{ width: `${ getPercent(unlike) }%` }} className={styles.progressDown}>
-        <img src={'/assets/unlike.png'} alt="inlike" />
+        <img src={'./assets/unlike.png'} alt="inlike" />
         <p>
           {`${ getPercent(unlike) }`}<span>%</span>
         </p>
@@ -82,14 +82,14 @@ export const ItemVotes = ({valueItem}) => {
             <div className={styles.drinkcardTitle}>
               <div className={`${styles.drinkcard} ${styles.bkLike}`}>
                 <span 
-                  style={{backgroundImage: 'url(/assets/like.png'}}
+                  style={{backgroundImage: 'url(./assets/like.png'}}
                   className={styles.ItemVotes__contentImg}></span>
               </div>
             </div> :
             <div className={styles.drinkcardTitle}>
               <div className={`${styles.drinkcard} ${styles.bkUnLike}`}>
                 <span 
-                  style={{backgroundImage: 'url(/assets/unlike.png'}}
+                  style={{backgroundImage: 'url(./assets/unlike.png'}}
                   className={styles.ItemVotes__contentImg}></span>
               </div>
             </div>

@@ -14,8 +14,8 @@ export const Footer = () => (
 
       <div className={styles.footer__folow}>
        <span>Folow Us</span>
-       <img src={'/assets/facebook.png'} alt="Facebook" />
-       <img src={'/assets/twitter.png'}  alt="Twitter" />
+       <img src={'./assets/facebook.png'} alt="Facebook" />
+       <img src={'./assets/twitter.png'}  alt="Twitter" />
       </div>
     </div>
   </>

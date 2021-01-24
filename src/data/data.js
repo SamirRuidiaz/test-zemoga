@@ -6,7 +6,7 @@ export const dataVotes = [
     unlike: 2, 
     ago: 'in Entertainment', 
     descrip: 'Vestibulum diam ante, porttitor a odio aget rhoncus neque. Aenean eu velit libero.', 
-    img: '/assets/ft3.png'},
+    img: './assets/ft3.png'},
   {
     id: 2, 
     name: 'Mark Zuckerberg', 
@@ -14,7 +14,7 @@ export const dataVotes = [
     unlike: 64, 
     ago: 'in Business', 
     descrip: 'Vestibulum diam ante, porttitor a odio aget rhoncus neque. Aenean eu velit libero.', 
-    img: '/assets/ft4.png'
+    img: './assets/ft4.png'
   },
   {
     id: 3, 
@@ -23,7 +23,7 @@ export const dataVotes = [
     unlike: 64, 
     ago: 'in Politics', 
     descrip: 'Vestibulum diam ante, porttitor a odio aget rhoncus neque. Aenean eu velit libero.', 
-    img: '/assets/ft2.png'
+    img: './assets/ft2.png'
   },
   {
     id: 4, 
@@ -32,6 +32,6 @@ export const dataVotes = [
     unlike: 30, 
     ago: 'in Entertainment', 
     descrip: 'Vestibulum diam ante, porttitor a odio aget rhoncus neque. Aenean eu velit libero.', 
-    img: '/assets/ft1.png'
+    img: './assets/ft1.png'
   }
 ]

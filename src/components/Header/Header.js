@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 import { Link } from "react-router-dom";
 
 export const Header = () => (
-  <header style={{backgroundImage: 'url(/assets/slider.png)'}} className={styles.navbar}>
+  <header style={{backgroundImage: 'url(./assets/slider.png)'}} className={styles.navbar}>
     <div className={styles.navbar__band}>
       <div className="container">
 
@@ -14,7 +14,7 @@ export const Header = () => (
             <li><Link to="/works">How It Works</Link></li>
             <li><Link to="/login-signup">Log In/Sign Up</Link></li>
             <li>
-              <img src={'/assets/search.png'}  alt="Seach" />
+              <img src={'./assets/search.png'}  alt="Seach" />
             </li>
           </ul>
         </nav>
@@ -38,10 +38,10 @@ export const Header = () => (
 
           <div className={styles.navbar__thumbs}>
             <div className={styles.navbar__thumbsup}>
-              <img src={'/assets/like.png'} alt="like" />
+              <img src={'./assets/like.png'} alt="like" />
             </div>
             <div className={styles.navbar__thumbsdown}>
-              <img src={'/assets/unlike.png'} alt="unlike" />
+              <img src={'./assets/unlike.png'} alt="unlike" />
             </div>
           </div>
         </article>
